@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>Decide For Me</title>
+		<link rel="import" href="bower_components/paper-button/paper-button.html">
+		<link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+		<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+		<link rel="import" href="bower_components/paper-menu/paper-menu.html">
+		<link rel="import" href="bower_components/paper-item/paper-item.html">
+		<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+		<link rel="import" href="bower_components/iron-pages/iron-pages.html">
+		<link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
+		<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+		<link rel="import" href="bower_components/paper-input/paper-input.html">
+		<link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+		<script src="bower_components/webcomponentsjs/webcomponents.js" type="text/javascript"></script>
+		<style type="text/css">
+			html,body {
+				height: 100%;
+				margin: 0;
+				background-color: #E5E5E5;
+				font-family: 'RobotoDraft', sans-serif;
+			}
+			
+			paper-toolbar.paper-toolbar-0 {
+				background: #ff5722;
+			}
+			
+			.floatingactionbutton {
+				position: absolute;
+				right: 10px;
+				bottom: 10px;
+			}
+			
+			.textfield {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+		</style>
+		
+		
+		<script type="text/javascript" src="main.js"></script>
+		
+		
+	</head>
+	<body style="height: 100%; width: 100%; overflow: hidden;" onload="javascript:setUpElements();">
+		<iron-pages selected="0" style="width: 100%; height: 100%;" id="pager">
+			<div>
+				<paper-toolbar justify="justified">
+					<div class="title">Decide For Me</div>
+				</paper-toolbar>
+				<div class="flex" style="overflow: scroll;">
+					<paper-menu id="groups">
+					</paper-menu>
+					<paper-fab class="floatingactionbutton" raised icon="add" onclick="javascript:goToAddGroup();"></paper-fab>
+				</div>
+			</div>
+			
+			
+			
+			<div>
+				<paper-toolbar justify="justified">
+					<div class="title" id="groupTitle"></div>
+				</paper-toolbar>
+				<div class="flex" style="overflow: scroll;">
+					<paper-menu id="items">
+					</paper-menu>
+					<paper-fab class="floatingactionbutton" raised icon="add" onclick="javascript:goToAddItem();"></paper-fab>
+				</div>
+			</div>
+			
+			
+			
+			<div>
+				<paper-toolbar justify="justified">
+					<div class="title">Add Group</div>
+				</paper-toolbar>
+				<div class="flex" style="overflow: scroll;">
+					<h3>
+						Name:
+					</h3>
+					<paper-input class="textfield" id="groupNameInput"></paper-input>
+					<br>
+					<br>
+					
+					<h3>
+						Description:
+					</h3>
+					<paper-input class="textfield" id="groupDescriptionInput"></paper-input>
+					
+					<paper-fab class="floatingactionbutton" raised icon="check" onclick="javascript:addGroup();"></paper-fab>
+				</div>
+			</div>
+			
+			
+			
+			<div>
+				<paper-toolbar justify="justified">
+					<div class="title">Add Item</div>
+				</paper-toolbar>
+				<div class="flex" style="overflow: scroll;">
+					<h3>
+						Name:
+					</h3>
+					<br>
+					<paper-input class="textfield" id="itemNameInput"></paper-input>
+					<br>
+					<br>
+					
+					<h3>
+						Description:
+					</h3>
+					<br>
+					<paper-input class="textfield" id="itemDescriptionInput"></paper-input>
+					
+					<paper-fab class="floatingactionbutton" raised icon="check" onclick="javascript:addItem();"></paper-fab>
+				</div>
+			</div>
+		</iron-pages>
+		
+		<div id="divider" style="background: #000; width: 100%; height: 3px; display: none;"></div>
+		
+		
+		<paper-item id="baseItem" style="display: none; overflow: hidden;" onclick="javascript:goToTappedItem(event);">
+			<div style="float: left; font-size: 1.17em;"></div>
+			<paper-icon-button icon="delete" onclick="javascript:deleteCurrentItem(event);" style="height: 32px; width: 32px; float: right;"></paper-icon-button>
+			<paper-ripple class="flex"></paper-ripple>
+		</paper-item>
+	</body>
+	
+</html>
