@@ -32,6 +32,7 @@ function goToTappedItem(e) {
 	if (!e)
     	e = window.event;
 	var curItem = e.srcElement || e.target;
+    curItem = curItem.parentNode;
 	for (var index=0,index=curItem; index = index.previousSibling; ++index);
 	
 }
@@ -42,14 +43,14 @@ function addGroup() {
 	localStorage.setItem("groups", JSON.stringify(groups));
 	document.getElementById("groups").innerHTML = "";
 	
-	items = JSON.parse(localStorage.getItem("groups")).groups;
+	groups = JSON.parse(localStorage.getItem("groups")).groups;
 	for(var x = 0; x<groups.length; x++) {
 		var tempItem = document.getElementById("baseItem").cloneNode(true);
 		var tempDivider = document.getElementById("divider").cloneNode(true);
 		tempItem.style.display = "flex";
 		tempDivider.style.display = "block";
 		tempItem.children[0].innerHTML = groups[x].name + "<br>" + groups[x].description;
-		document.getElementById("itmes").appendChild(tempDivider);
+		document.getElementById("groups").appendChild(tempDivider);
 		document.getElementById("groups").appendChild(tempItem);
 	}
 	document.getElementById('pager').select("0");
