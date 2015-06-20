@@ -63,6 +63,7 @@
 				<paper-toolbar justify="justified">
 					<paper-icon-button icon="arrow-back" onclick="backToGroups();"></paper-icon-button>
 					<div class="title" id="groupTitle"></div>
+					<paper-icon-button icon="refresh" onclick="chooseRandom();"></paper-icon-button>
 				</paper-toolbar>
 				<div class="flex" style="overflow-y: scroll; overflow-x: hidden;">
 					<paper-menu id="items">
@@ -100,7 +101,7 @@
 				<paper-toolbar justify="justified">
 					<div class="title">Add Item</div>
 				</paper-toolbar>
-				<div class="flex" style="overflow: scroll;">
+				<div class="flex" style="overflow-y: scroll; overflow-x: hidden;">
 					<h3>
 						Name:
 					</h3>
@@ -118,19 +119,42 @@
 					<paper-fab class="floatingactionbutton" raised icon="check" onclick="javascript:addItem();"></paper-fab>
 				</div>
 			</div>
+				
+				
+			<div>
+				<paper-toolbar justify="justified">
+					<div class="title">The Chosen One</div>
+				</paper-toolbar>
+				<div class="flex" style="overflow-y: scroll; overflow-x: hidden;">
+					<h3>
+						Name:
+					</h3>
+					<br>
+					<div id="chosenOneName"></div>
+					<br>
+					<br>
+					
+					<h3>
+						Description:
+					</h3>
+					<br>
+					<div id="chosenOneDescription"></div>
+					
+					<paper-fab class="floatingactionbutton" raised icon="check" onclick="javascript:addItem();"></paper-fab>
+				</div>
+			</div>
 		</iron-pages>
 		
 		<div id="divider" style="background: #000; width: 100%; height: 3px; display: none;"></div>
 		
 		
-		<paper-item id="baseItem" style="display: none; width: 100%;" elevation="2" onclick="goToTappedItem(event);">
+		<paper-item id="baseItem" style="display: none;" onclick="goToTappedItem(event);">
 			<div style="pointer-events: none; z-index: 1;">
 				<div style="font-size: 1.17em;"></div>
-				<br>
 				<div></div>
 			</div>
 			
-			<paper-icon-button icon="delete" style="vertical-align: middle; float: right; z-index: 1;"></paper-icon-button>
+			<paper-icon-button icon="delete" style="vertical-align: middle; float: right; z-index: 2;" onclick="deleteCurrentItem(event);"></paper-icon-button>
 		</paper-item>
 	</body>
 	

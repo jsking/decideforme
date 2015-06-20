@@ -1,4 +1,5 @@
 var curGroup = null;
+var deleteThis;
 
 function setUpElements() {
 	if(localStorage.groups != null) {
@@ -24,14 +25,16 @@ function goToTappedItem(e) {
 	e.stopPropagation();
 	
 	var curItem = e.srcElement || e.target;
-    //curItem = curItem.parentNode;
 	
-	curGroup = Array.prototype.indexOf.call(curItem.parentNode.children, curItem);
-	
-	curGroup = ((curGroup + 1) / 2) - 1;
-	
-	updateItems();
-	
+	if(curItem.parentNode.id == "groups") {
+		curGroup = Array.prototype.indexOf.call(curItem.parentNode.children, curItem);
+		
+		curGroup = ((curGroup + 1) / 2) - 1;
+		
+		document.getElementById("groupTitle").innerHTML = JSON.parse(localStorage.groups).groups[curGroup].name;
+		
+		updateItems();
+	}
 	document.getElementById('pager').select("1");
 }
 
@@ -68,20 +71,23 @@ function addItem(){
 function deleteCurrentItem(e) {
 	if (!e)
         e = window.event;
-	var deleteThis = e.srcElement || e.target;
 	
-	deleteThis = deleteThis.parent;
+	deleteThis = e.srcElement || e.target;
 	
-	var index = Array.prototype.indexOf.call(deleteThis.parent.children, deleteThis);
+	deleteThis = deleteThis.parentNode;
+	
+	var index = Array.prototype.indexOf.call(deleteThis.parentNode.parentNode.children, deleteThis.parentNode);
 	
 	index = ((index + 1) / 2) - 1;
 	
-	if(deleteThis.parent.id == "groups") {
+	if(deleteThis.parentNode.parentNode.id == "groups") {
 		var groups = JSON.parse(localStorage.groups);
 		groups.groups.splice(index, 1);
 		localStorage.groups = JSON.stringify(groups);
 		
 		updateGroups();
+		
+		document.getElementById('pager').select("0");
 	} else {
 		var groups = JSON.parse(localStorage.groups);
 		groups.groups[curGroup].items.splice(index, 1);
@@ -89,14 +95,17 @@ function deleteCurrentItem(e) {
 		
 		updateItems();
 	}
-	
-	document.getElementById('pager').select("1");
 }
 
 //Randomly choose an item
 
 function chooseRandom() {
+	var randItems = JSON.parse(localStorage.groups).groups[curGroup].items;
+	var randNum = Math.floor(Math.random() * randItems.length);
+	document.getElementById("chosenOneName").innerHTML = randItems[randNum].name;
+	document.getElementById("chosenOneDescription").innerHTML = randItems[randNum].description;
 	
+	document.getElementById('pager').select("4");
 }
 
 //Update functions
@@ -107,7 +116,7 @@ function updateGroups() {
 	for(var x = 0; x<groups.length; x++) {
 		var tempItem = document.getElementById("baseItem").cloneNode(true);
 		var tempDivider = document.getElementById("divider").cloneNode(true);
-		tempItem.style.display = "block";
+		tempItem.style.display = "flex";
 		tempDivider.style.display = "block";
 		tempItem.children[0].children[0].innerHTML = groups[x].name;
 		tempItem.children[0].children[1].innerHTML = groups[x].description;
