@@ -1,0 +1,27 @@
+.center_vertical {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.body_padding {
+	padding: 0 16px;
+}
+
+.floating-action-button {
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.ui-dialog {
+	
+}
+
+body {
+	overflow-y: hidden;
+}
